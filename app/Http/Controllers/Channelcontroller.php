@@ -25,6 +25,7 @@ class Channelcontroller extends Controller
         $appointment->doctor_name = $request->doctor_name;
         $appointment->hospital_name = $request->hospital_name;
         $appointment->date = $request->date;
+        $appointment->user_id = auth()->user()->id;
        // $appointment->appointment_number = $request->appointment_number;
         $appointment->payment_reference = $request->payment_reference;
        // $appointment->status = $request->status;
@@ -37,7 +38,7 @@ class Channelcontroller extends Controller
 
 
     public function index(){
-        $appointments = Appointment::where('patient_name', auth()->user()->name)->get();
+        $appointments = Appointment::where('user_id', auth()->user()->id)->get();
         return view('Channel.mybooking', compact('appointments'));
     }
     
